@@ -6,21 +6,27 @@ export default async function Navbar(){
   const session = await getServerSession(options);
 
   return (
-    <nav>
-      <ul className="flex flex-row [&_*]:m-1">
-        <li><Link href='/'>Home</Link></li>
-        <li><Link href='/about'>About</Link></li>
-        {
-          !session
-          ?
-          <li><Link href='/api/auth/signin'>Signin</Link></li>
-          :
-          <>
-            <li><Link href='/profile'>Profile</Link></li>
-            <li><Link href='/api/auth/signout'>Signout</Link></li>
-          </>
-        }
-      </ul>
+    <nav className="flex bg-gray-900 text-white p-2">
+      <div className="[&_.link]:mx-1 py-2 ...">
+        <Link className="link hover:opacity-80" href='/'>Home</Link>
+        <Link className="link hover:opacity-80" href='/about'>About</Link>
+      </div>
+      
+      {
+        !session
+        ?
+        <div className="[&_.link]:mx-1 ml-auto py-2 ...">
+          <Link className="link hover:opacity-80" href='/api/auth/signin'>Signin</Link>  
+        </div>
+        
+        :
+        <div className="mx-1 ml-auto flex [&_.link]:py-2">
+          <Link href='/profile'>
+            <img className="mx-1 rounded-full w-10 hover:opacity-80" src={session.user?.image || ''} alt="profile picture" />
+          </Link>
+          <Link className="link hover:opacity-80" href='/api/auth/signout'>Signout</Link>
+        </div>
+      }
     </nav>
   );
 }
