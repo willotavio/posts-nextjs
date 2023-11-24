@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@types/jsonwebtoken": "^9.0.5",
+    "firebase": "^10.6.0",
+    "jsonwebtoken": "^9.0.2",
     "next": "13.5.4",
     "next-auth": "^4.24.4",
     "react": "^18",
