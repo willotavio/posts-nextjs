@@ -30,7 +30,7 @@ export default function AddPostForm({ user } : Props){
     data.userName = user.name;
     data.userPic = user.image;
     const date = new Date();
-    data.date = date;
+    data.date = date.toISOString().slice(0, 19).replace("T", " ");
     addPost(data as Post);
     reset();
   });
