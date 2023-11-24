@@ -9,6 +9,11 @@ export type User = {
 }
 
 export type Post = {
-  id: string;
+  id?: string;
   content: string;
+  userEmail: string;
+  userName: string;
+  userPic: string;
+  date: string;
+  visibility: string
 }
