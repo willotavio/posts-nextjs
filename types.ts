@@ -11,6 +11,4 @@ export type User = {
 export type Post = {
   id: string;
   content: string;
-  user: string;
-  date: string;
 }
