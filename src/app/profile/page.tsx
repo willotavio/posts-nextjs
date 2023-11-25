@@ -6,11 +6,7 @@ import getUserPosts from "../lib/getUserPosts";
 import AddPostForm from "../posts/AddPostForm";
 import PostCard from "../posts/PostCard";
 
-type Props = {
-  user: User
-}
-
-export default async function Page({ user }: Props){
+export default async function Page(){
   const session = await getServerSession(options); 
   if(session?.user){
     let posts: Post[] = await getUserPosts(session.user);
