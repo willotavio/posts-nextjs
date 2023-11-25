@@ -11,6 +11,5 @@ export default async function getPublicPosts(){
   posts = querySnapshot.docs.map((doc) => (
       ({...doc.data(), id: doc.id})
     )) as Post[];
-
   return posts;
 }

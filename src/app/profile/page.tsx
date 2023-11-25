@@ -3,8 +3,8 @@ import { options } from "../api/auth/[...nextauth]/options";
 import UserCard from "../ui/UserCard";
 import { Post, User } from "../../../types";
 import getUserPosts from "../lib/getUserPosts";
-import AddPostForm from "../posts/addPostForm";
-import PostCard from "../posts/postCard";
+import AddPostForm from "../posts/AddPostForm";
+import PostCard from "../posts/PostCard";
 
 type Props = {
   user: User
@@ -27,7 +27,7 @@ export default async function Page({ user }: Props){
           <h1>Posts</h1>
           {
             posts.map((post) => (
-              <PostCard key={ post.id } post={ post }/>
+              <PostCard key={ post.id } post={ post } user={ session.user as User}/>
             ))
           }
         </>
