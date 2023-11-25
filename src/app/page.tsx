@@ -3,6 +3,7 @@ import { options } from "./api/auth/[...nextauth]/options";
 import Link from "next/link";
 import getPublicPosts from "./lib/getPublicPosts";
 import PostCard from "./posts/postCard";
+import AddPostForm from "./posts/addPostForm";
 
 export default async function Home() {
   const session = await getServerSession(options);
@@ -13,17 +14,18 @@ export default async function Home() {
         session?.user
         ?
         <>
+          <AddPostForm user={ session.user }/>
           <h1>Posts</h1>
           {
             posts.map((post) => (
-              <PostCard post={ post }/>
+              <PostCard key={ post.id } post={ post }/>
             ))
           }
         </>
         :
-        <>
-          <Link className="bg-slate-800 text-white p-3 hover:bg-slate-700 ..." href='/api/auth/signin'>Login</Link>
-        </>
+        <div className="bg-slate-800 w-32 m-auto mt-5 text-white p-3 hover:bg-slate-700 ...">
+          <Link href='/api/auth/signin'>Login</Link>
+        </div>
       }
     </div>
   )

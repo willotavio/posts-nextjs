@@ -36,15 +36,19 @@ export default function AddPostForm({ user } : Props){
   });
 
   return(
-    <form className="[*_&]:w-60 flex flex-col mx-auto my-10" onSubmit={onSubmit}>
-      <h1>Add Post</h1>
-      <textarea className="border-b-2 border-black" {...register("content")} placeholder="Content" />
-      <select {...register("visibility")}>
-        <option value="public">Public</option>
-        <option value="private">Private</option>
-      </select>
-      <input className="bg-black text-white hover:cursor-pointer" type="submit" value="Post" />
+    <form className="w-96 [*_&]:w-96 flex flex-col mx-auto my-10" onSubmit={onSubmit}>
+      <div className="flex mb-5">
+        { user.image && <img className="rounded-full w-10 h-10 mr-2" src={ user.image } alt="profile picture" /> }
+        <textarea className="border-b-2 border-gray-200 w-80" {...register("content")} placeholder="Say something" />
+      </div>
+      <div className="flex">
+        <select className="w-16 text-sm" {...register("visibility")}>
+          <option value="public">Public</option>
+          <option value="private">Private</option>
+        </select>
+        <input className="bg-gray-900 text-white text-sm w-20 ml-auto rounded-2xl hover:cursor-pointer hover:opacity-80" type="submit" value="Post" />
+      </div>
+      
     </form>
   );
-
 }
