@@ -16,7 +16,9 @@ export default async function Home() {
         <>
           <AddPostForm user={ session.user }/>
           <hr />
-          <PostsList user={ session.user } posts={ posts } />
+          <div className="mt-5">
+            <PostsList user={ session.user } posts={ posts } />
+          </div>
         </>
         :
         <div className="bg-slate-800 w-32 m-auto mt-5 text-white p-3 hover:bg-slate-700 ...">

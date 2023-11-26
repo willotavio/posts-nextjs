@@ -19,6 +19,11 @@ export default function PostsList({user, posts}: Props){
     dispatch(insertPost(posts));
   }, [dispatch, posts]);
   let postsList = useAppSelector((state) => state.postReducer.value.postsList);
+  postsList = postsList.slice().sort((a, b) => {
+    let dateA = new Date(a.date).getTime();
+    let dateB = new Date(b.date).getTime();
+    return dateB - dateA;
+  });
   return(
     <div>
       {
