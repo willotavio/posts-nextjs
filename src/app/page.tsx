@@ -16,12 +16,15 @@ export default async function Home() {
         ?
         <>
           <AddPostForm user={ session.user }/>
-          <h1>Posts</h1>
-          {
-            posts.map((post) => (
-              <PostCard key={ post.id } post={ post } user={ session.user as User }/>
-            ))
-          }
+          <hr />
+          <div className="mt-5">
+            {
+              posts.map((post) => (
+                <PostCard key={ post.id } post={ post } user={ session.user as User }/>
+              ))
+            }
+          </div>
+          
         </>
         :
         <div className="bg-slate-800 w-32 m-auto mt-5 text-white p-3 hover:bg-slate-700 ...">

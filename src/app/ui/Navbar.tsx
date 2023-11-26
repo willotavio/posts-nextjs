@@ -6,7 +6,7 @@ export default async function Navbar(){
   const session = await getServerSession(options);
 
   return (
-    <nav className="flex bg-gray-900 text-white p-2">
+    <nav className="flex fixed top-0 w-full bg-gray-900 text-white p-2">
       <div className="[&_.link]:mx-1 py-2 ...">
         <Link className="link hover:opacity-80" href='/'>Home</Link>
         <Link className="link hover:opacity-80" href='/about'>About</Link>
@@ -18,7 +18,6 @@ export default async function Navbar(){
         <div className="[&_.link]:mx-1 ml-auto py-2 ...">
           <Link className="link hover:opacity-80" href='/api/auth/signin'>Signin</Link>  
         </div>
-        
         :
         <div className="mx-1 ml-auto flex [&_.link]:py-2">
           <Link href='/profile'>
