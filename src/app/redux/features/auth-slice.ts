@@ -25,9 +25,20 @@ export const post = createSlice({
           postsList: action.payload
         }
       }
+    },
+    removePost: (state, action: PayloadAction<string>) => {
+      let updatedPostsList = [];
+      updatedPostsList = state.value.postsList.filter((post) => (
+        post.id !== action.payload
+      ));
+      return {
+        value: {
+          postsList: updatedPostsList
+        }
+      }
     }
   }
 });
 
-export const { insertPost } = post.actions;
+export const { insertPost, removePost } = post.actions;
 export default post.reducer;
