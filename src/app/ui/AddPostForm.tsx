@@ -5,12 +5,20 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Post, User } from "../../../types";
 import addPost from "../lib/addPost";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../redux/store";
+import { insertPost } from "../redux/features/auth-slice";
+import { useAppSelector } from "../redux/store";
 
 type Props = {
   user: User;
 }
 
 export default function AddPostForm({ user } : Props){
+
+  const dispatch = useDispatch<AppDispatch>();
+
+  let postsList: Post[] = useAppSelector((state) => state.postReducer.value.postsList);
 
   const schema = z.object({
     content: z.string().min(1).max(255),
@@ -32,6 +40,8 @@ export default function AddPostForm({ user } : Props){
     const date = new Date();
     data.date = date.toISOString().slice(0, 19).replace("T", " ");
     addPost(data as Post);
+    const updatedPostsList: Post[] = [...postsList, data as Post];
+    dispatch(insertPost(updatedPostsList));
     reset();
   });
 

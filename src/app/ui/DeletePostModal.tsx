@@ -29,7 +29,6 @@ export default function DeletePostModal({ id }: Props){
               <button className="w-20 m-auto bg-gray-900 text-white text-base rounded-2xl hover:cursor-pointer hover:bg-opacity-80" onClick={closeModal}>Cancel</button>
             </div>
           </div>
-          
         </div>
       }
     </>

@@ -2,9 +2,8 @@ import { getServerSession } from "next-auth"
 import { options } from "./api/auth/[...nextauth]/options";
 import Link from "next/link";
 import getPublicPosts from "./lib/getPublicPosts";
-import PostCard from "./ui/PostCard";
 import AddPostForm from "./ui/AddPostForm";
-import { User } from "../../types";
+import PostsList from "./ui/PostsList";
 
 export default async function Home() {
   const session = await getServerSession(options);
@@ -17,14 +16,7 @@ export default async function Home() {
         <>
           <AddPostForm user={ session.user }/>
           <hr />
-          <div className="mt-5">
-            {
-              posts.map((post) => (
-                <PostCard key={ post.id } post={ post } user={ session.user as User }/>
-              ))
-            }
-          </div>
-          
+          <PostsList user={ session.user } posts={ posts } />
         </>
         :
         <div className="bg-slate-800 w-32 m-auto mt-5 text-white p-3 hover:bg-slate-700 ...">
