@@ -21,6 +21,7 @@ export default function AddPostForm({ user } : Props){
   let postsList: Post[] = useAppSelector((state) => state.postReducer.value.postsList);
 
   const schema = z.object({
+    id: z.string().optional(),
     content: z.string().min(1).max(255),
     userEmail: z.string().optional(),
     userName: z.string().optional(),
@@ -39,8 +40,10 @@ export default function AddPostForm({ user } : Props){
     data.userPic = user.image;
     const date = new Date();
     data.date = date.toISOString().slice(0, 19).replace("T", " ");
-    addPost(data as Post);
-    const updatedPostsList: Post[] = [...postsList, data as Post];
+    const postId = await addPost(data as Post);
+    data.id = postId;
+    console.log(typeof(data.id));
+    let updatedPostsList: Post[] = [...postsList, data as Post];
     dispatch(insertPost(updatedPostsList));
     reset();
   });
