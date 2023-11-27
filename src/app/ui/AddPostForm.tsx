@@ -7,7 +7,7 @@ import { Post, User } from "../../../types";
 import addPost from "../lib/addPost";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../redux/store";
-import { insertPost } from "../redux/features/auth-slice";
+import { insertPost } from "../redux/features/posts-slice";
 import { useAppSelector } from "../redux/store";
 
 type Props = {
@@ -48,17 +48,17 @@ export default function AddPostForm({ user } : Props){
   });
 
   return(
-    <form className="w-96 [*_&]:w-96 xs:w-12 xs:[*_&]:w-12 flex flex-col mx-auto my-10" onSubmit={onSubmit}>
+    <form className="w-96 flex flex-col mx-auto my-10 bg-white shadow-md shadow-gray-300 rounded-md p-3" onSubmit={onSubmit}>
       <div className="flex mb-5">
         { user.image && <img className="rounded-full w-10 h-10 mr-2" src={ user.image } alt="profile picture" /> }
-        <textarea className="border-b-2 border-gray-200 w-80 xs:w-12" {...register("content")} placeholder="Say something" />
+        <textarea className="border-b-2 border-gray-200 w-80" {...register("content")} placeholder="Say something" />
       </div>
       <div className="flex">
-        <select className="w-16 text-sm" {...register("visibility")}>
+        <select className="w-20" {...register("visibility")}>
           <option value="public">Public</option>
           <option value="private">Private</option>
         </select>
-        <input className="bg-gray-900 text-white text-sm w-20 ml-auto rounded-2xl hover:cursor-pointer hover:opacity-80" type="submit" value="Post" />
+        <input className="bg-gray-900 text-white p-1 w-20 ml-auto rounded-2xl hover:cursor-pointer hover:bg-gray-800" type="submit" value="Post" />
       </div>
       
     </form>

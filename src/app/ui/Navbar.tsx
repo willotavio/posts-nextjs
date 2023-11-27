@@ -6,7 +6,7 @@ export default async function Navbar(){
   const session = await getServerSession(options);
 
   return (
-    <nav className="flex fixed top-0 w-full bg-gray-900 text-white p-2">
+    <nav className="flex fixed top-0 w-full bg-gray-900 text-white p-2 z-50">
       <div className="[&_.link]:mx-1 py-2 ...">
         <Link className="link hover:opacity-80" href='/'>Home</Link>
         <Link className="link hover:opacity-80" href='/about'>About</Link>

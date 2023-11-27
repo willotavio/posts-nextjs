@@ -5,7 +5,7 @@ import PostCard from "./PostCard";
 import { useAppSelector } from "../redux/store";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../redux/store";
-import { insertPost } from "../redux/features/auth-slice";
+import { insertPost } from "../redux/features/posts-slice";
 import { useEffect } from "react";
 
 type Props = {
