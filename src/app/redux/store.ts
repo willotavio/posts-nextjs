@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import postReducer from "./features/auth-slice";
+import postReducer from "./features/posts-slice";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
 
 export const store = configureStore({
