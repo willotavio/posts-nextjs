@@ -5,6 +5,7 @@ import { Post } from "../../../types";
 import getUserPosts from "../lib/getUserPosts";
 import AddPostForm from "../ui/AddPostForm";
 import PostsList from "../ui/PostsList";
+import { redirect } from "next/navigation";
 
 import { Metadata } from "next";
 
@@ -33,5 +34,8 @@ export default async function Page(){
         }
       </div>
     );
+  }
+  else{
+    redirect('/api/auth/signin');
   }
 }
