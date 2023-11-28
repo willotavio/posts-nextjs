@@ -2,6 +2,7 @@
 
 import { Post, User } from "../../../types";
 import DeletePostModal from "./DeletePostModal";
+import Image from "next/image";
 
 type Props = {
   post: Post;
@@ -13,7 +14,7 @@ export default function PostCard({ post, user }: Props){
     <div className="m-auto p-3 w-96 bg-white border-2 border-gray-100 rounded-md">
       <div className="grid grid-cols-3 mb-5 [*_&]:text-xs">
         <div className="[*_&]:text-justify flex col-span-2">
-          <img className="rounded-full w-10" src={post.userPic} alt="user picture" />
+          {post?.userPic && <Image className="rounded-full w-10" src={post.userPic} alt="user picture" width={100} height={100}/> }
           <p className="mx-2 mt-3">{post.userName}</p>
           <p className="mt-3">{post.date.split(" ")[0]}</p>
         </div>
