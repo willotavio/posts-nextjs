@@ -3,19 +3,19 @@
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Post } from "../../../types";
+import { Post, User } from "../../../types";
 import addPost from "../lib/addPost";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../redux/store";
 import { insertPost } from "../redux/features/posts-slice";
 import { useAppSelector } from "../redux/store";
-import { useSession } from "next-auth/react";
+import Image from "next/image";
 
-export default function AddPostForm(){
-  const { data: session } = useSession({
-    required: true
-  });
+type Props = {
+  user: User
+}
 
+export default function AddPostForm({ user }: Props){
   const dispatch = useDispatch<AppDispatch>();
 
   let postsList: Post[] = useAppSelector((state) => state.postReducer.value.postsList);
@@ -33,7 +33,7 @@ export default function AddPostForm(){
   });
 
   const onSubmit = handleSubmit( async(data) => {
-    data.userId = session?.user.id
+    data.userId = user.id
     const date = new Date();
     data.date = date.toISOString().slice(0, 19).replace("T", " ");
     const postId = await addPost(data as Post);
@@ -41,19 +41,19 @@ export default function AddPostForm(){
     let updatedPostsList: Post[] = [...postsList, 
       {
         ...data as Post, 
-        userName: session?.user.name as string,
-        userEmail: session?.user.email as string,
-        userPic: session?.user.image as string
+        userName: user.name as string,
+        userEmail: user.email as string,
+        userPic: user.image as string
       }];
     dispatch(insertPost(updatedPostsList));
     reset();
   });
 
-  if(session?.user){
+  if(user){
     return(
       <form className="w-96 flex flex-col mx-auto my-10 bg-white shadow-md shadow-gray-300 rounded-md p-3" onSubmit={onSubmit}>
         <div className="flex mb-5">
-          { session.user.image && <img className="rounded-full w-10 h-10 mr-2" src={ session.user.image } alt="profile picture" /> }
+          { user.image && <Image className="rounded-full w-10 h-10 mr-2" src="https://lh3.googleusercontent.com/a/ACg8ocLoWEiGkbKuJdrbxXHtE3iyMOtwMdGJS9QWiBubjIHqNA=s96-c" alt="profile picture" width={100} height={100} /> }
           <textarea className="border-b-2 border-gray-200 w-80" {...register("content")} placeholder="Say something" />
         </div>
         <div className="flex">

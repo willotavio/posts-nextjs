@@ -26,7 +26,7 @@ export default async function Page(){
         <>
           <UserCard user={ session.user } />
 
-          <AddPostForm/>
+          <AddPostForm user = { session.user }/>
           <hr />
           <div className="mt-10">
             <PostsList user={ session.user } posts={ posts }/>
