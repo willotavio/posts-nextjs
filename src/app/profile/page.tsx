@@ -16,7 +16,8 @@ export const metadata: Metadata = {
 export default async function Page(){
   const session = await getServerSession(options); 
   if(session?.user){
-    let posts: Post[] = await getUserPosts(session.user);
+    let posts: Post[] = await getUserPosts(session.user.id as string);
+    
     return (
       <div className="text-center">
         {
@@ -25,7 +26,7 @@ export default async function Page(){
         <>
           <UserCard user={ session.user } />
 
-          <AddPostForm user={ session.user }/>
+          <AddPostForm/>
           <hr />
           <div className="mt-10">
             <PostsList user={ session.user } posts={ posts }/>
