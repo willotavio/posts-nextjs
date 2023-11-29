@@ -22,7 +22,7 @@ export default async function Navbar(){
         :
         <div className="mx-1 ml-auto flex [&_.link]:py-2">
           <Link href='/profile'>
-            <Image className="mx-1 rounded-full w-10 hover:opacity-80" src={session.user?.image || ''} alt="profile picture" width={100} height={100}/>
+            <Image className="mx-1 rounded-full w-10 h-10 hover:opacity-80" src={session.user?.image || ''} alt="profile picture" width={100} height={100} priority={true} />
           </Link>
           <Link className="link hover:opacity-80" href='/api/auth/signout'>Signout</Link>
         </div>

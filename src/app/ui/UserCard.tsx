@@ -10,9 +10,10 @@ type Props = {
 
 export default function UserCard({ user }: Props){
   const posts = useAppSelector((state) => state.postReducer.value.postsList);
+
   return (
     <div className="[&_*]:m-auto text-center w-96 xs:w-24 m-auto">
-      <Image className="rounded-full" src={user.image || ''} alt="profile picture" width={100} height={100}/>
+      <Image className="rounded-full w-20 h-20" src={user.image || ''} alt="profile picture" width={100} height={100} priority={true} />
       <p>{ user.name }</p>
       <p>{ user.email }</p>
       {

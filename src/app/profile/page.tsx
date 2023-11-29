@@ -8,6 +8,7 @@ import PostsList from "../ui/PostsList";
 import { redirect } from "next/navigation";
 
 import { Metadata } from "next";
+import PostImageForm from "../ui/ChangeProfilePictureForm";
 
 export const metadata: Metadata = {
   title: "Profile"
@@ -25,6 +26,7 @@ export default async function Page(){
         &&
         <>
           <UserCard user={ session.user } />
+          <PostImageForm user={ session.user }/>
 
           <AddPostForm user = { session.user }/>
           <hr />
