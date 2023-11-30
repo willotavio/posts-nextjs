@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from "react";
-import deletePost from "../lib/deletePost";
+import deletePost from "../lib/post/deletePost";
 import { removePost } from "../redux/features/posts-slice";
 import { AppDispatch } from "../redux/store";
 import { useDispatch } from "react-redux";

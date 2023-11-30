@@ -2,13 +2,13 @@ import { getServerSession } from "next-auth";
 import { options } from "../api/auth/[...nextauth]/options";
 import UserCard from "../ui/UserCard";
 import { Post } from "../../../types";
-import getUserPosts from "../lib/getUserPosts";
+import getUserPosts from "../lib/post/getUserPosts";
 import AddPostForm from "../ui/AddPostForm";
 import PostsList from "../ui/PostsList";
 import { redirect } from "next/navigation";
+import ChangeProfilePictureForm from "../ui/ChangeProfilePictureForm";
 
 import { Metadata } from "next";
-import PostImageForm from "../ui/ChangeProfilePictureForm";
 
 export const metadata: Metadata = {
   title: "Profile"
@@ -26,7 +26,7 @@ export default async function Page(){
         &&
         <>
           <UserCard user={ session.user } />
-          <PostImageForm user={ session.user }/>
+          <ChangeProfilePictureForm user={ session.user }/>
 
           <AddPostForm user = { session.user }/>
           <hr />

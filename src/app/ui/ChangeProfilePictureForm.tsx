@@ -3,7 +3,7 @@
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import changeProfilePicture from "../lib/changeProfilePicture";
+import changeProfilePicture from "../lib/user/changeProfilePicture";
 import { User } from "../../../types";
 import { useState } from "react";
 
@@ -23,7 +23,7 @@ export default function PostImageForm({ user }: Props){
   });
   
   const onSubmit = handleSubmit( async (data) => {
-    const updated = await changeProfilePicture(data.image[0], user?.id as string);
+    const updated = await changeProfilePicture(data.image[0], user);
     updated ? setMessage("Updated") : setMessage("Invalid image");
     reset();
   });

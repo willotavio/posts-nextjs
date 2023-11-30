@@ -1,7 +1,7 @@
 import { collection, getDocs, where, query } from "firebase/firestore";
-import { db } from "../config/firebase";
-import { Post } from "../../../types";
-import getUser from "./getUser";
+import { db } from "../../config/firebase";
+import { Post } from "../../../../types";
+import getUser from "../user/getUser";
 
 export default async function getUserPosts(userId: string){
   
@@ -17,9 +17,9 @@ export default async function getUserPosts(userId: string){
     )) as Post[];
 
   posts.forEach((post) => {
-    post.userName = queryUser.name;
-    post.userEmail = queryUser.email;
-    post.userPic = queryUser.image;
+    post.userName = queryUser?.name;
+    post.userEmail = queryUser?.email;
+    post.userPic = queryUser?.image;
   });
 
   return posts;

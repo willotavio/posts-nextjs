@@ -4,7 +4,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Post, User } from "../../../types";
-import addPost from "../lib/addPost";
+import addPost from "../lib/post/addPost";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../redux/store";
 import { insertPost } from "../redux/features/posts-slice";

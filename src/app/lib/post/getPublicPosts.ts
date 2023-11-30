@@ -1,7 +1,7 @@
 import { collection, query, where, getDocs } from "firebase/firestore";
-import { db } from "../config/firebase";
-import { Post } from "../../../types";
-import getUser from "./getUser";
+import { db } from "../../config/firebase";
+import { FirestoreUser, Post } from "../../../../types";
+import getUser from "../user/getUser";
 
 export default async function getPublicPosts(){
   
@@ -20,7 +20,7 @@ export default async function getPublicPosts(){
   const users = await Promise.all(usersPromises);
   
   posts.forEach( async(post) => {
-    let postUser = users.find((user) => user.id == post.userId)
+    let postUser: FirestoreUser = users.find((user) => user.id == post.userId) as FirestoreUser;
     post.userName = postUser?.name;
     post.userEmail = postUser?.email;
     post.userPic = postUser?.image;

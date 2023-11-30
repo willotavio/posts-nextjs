@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth"
 import { options } from "./api/auth/[...nextauth]/options";
 import Link from "next/link";
-import getPublicPosts from "./lib/getPublicPosts";
+import getPublicPosts from "./lib/post/getPublicPosts";
 import AddPostForm from "./ui/AddPostForm";
 import PostsList from "./ui/PostsList";
 
