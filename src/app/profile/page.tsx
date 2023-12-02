@@ -29,7 +29,6 @@ export default async function Page(){
           <ChangeProfilePictureForm user={ session.user }/>
 
           <AddPostForm user = { session.user }/>
-          <hr />
           <div className="mt-10">
             <PostsList user={ session.user } posts={ posts }/>
           </div>
