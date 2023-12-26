@@ -2,7 +2,7 @@
 
 import { User } from "../../../types";
 import { useAppSelector } from "../redux/store";
-import Image from "next/image";
+import ChangeProfilePictureButton from "./ChangeProfilePictureButton";
 
 type Props = {
   user: User
@@ -13,7 +13,7 @@ export default function UserCard({ user }: Props){
 
   return (
     <div className="[&_*]:m-auto text-center w-96 xs:w-24 m-auto">
-      <Image className="rounded-full w-20 h-20" src={user.image || ''} alt="profile picture" width={100} height={100} priority={true} />
+      <ChangeProfilePictureButton user={ user } />
       <p>{ user.name }</p>
       <p>{ user.email }</p>
       {

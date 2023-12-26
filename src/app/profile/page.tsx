@@ -6,7 +6,6 @@ import getUserPosts from "../lib/post/getUserPosts";
 import AddPostForm from "../ui/AddPostForm";
 import PostsList from "../ui/PostsList";
 import { redirect } from "next/navigation";
-import ChangeProfilePictureForm from "../ui/ChangeProfilePictureForm";
 
 import { Metadata } from "next";
 
@@ -26,7 +25,6 @@ export default async function Page(){
         &&
         <>
           <UserCard user={ session.user } />
-          <ChangeProfilePictureForm user={ session.user }/>
 
           <AddPostForm user = { session.user }/>
           <div className="mt-10">

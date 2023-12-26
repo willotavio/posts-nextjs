@@ -1,4 +1,4 @@
-import { getStorage, ref, uploadBytes, deleteObject, getDownloadURL } from "firebase/storage";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { db } from "../../config/firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { v4 } from "uuid";
