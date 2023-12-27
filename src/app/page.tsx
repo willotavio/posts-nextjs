@@ -1,13 +1,11 @@
-import { getServerSession } from "next-auth"
+import { getServerSession } from "next-auth";
 import { options } from "./api/auth/[...nextauth]/options";
 import Link from "next/link";
-import getPublicPosts from "./lib/post/getPublicPosts";
 import AddPostForm from "./ui/AddPostForm";
 import PublicPostsList from "./ui/PublicPostsList";
 
 export default async function Home() {
   const session = await getServerSession(options);
-  const posts = await getPublicPosts();
   return (
     <div className='text-center'>
       {

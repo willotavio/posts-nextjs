@@ -25,3 +25,11 @@ export type Post = {
   date: string;
   visibility: string
 }
+
+export type TUpdatePost = {
+  id?: string;
+  content?: string;
+  userId?: string,
+  date?: string;
+  visibility?: string
+}

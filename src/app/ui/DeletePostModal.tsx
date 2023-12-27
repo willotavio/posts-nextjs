@@ -20,7 +20,7 @@ export default function DeletePostModal({ id }: Props){
     setIsOpen(false);
   }
   return(
-    <>
+    <div>
       <button className="hover:opacity-80" onClick={openModal}>Delete</button>
       {
         isOpen
@@ -35,6 +35,6 @@ export default function DeletePostModal({ id }: Props){
           </div>
         </div>
       }
-    </>
+    </div>
   );
 }
