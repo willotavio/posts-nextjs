@@ -1,10 +1,8 @@
 import { getServerSession } from "next-auth";
 import { options } from "../api/auth/[...nextauth]/options";
 import UserCard from "../ui/UserCard";
-import { Post } from "../../../types";
-import getUserPosts from "../lib/post/getUserPosts";
 import AddPostForm from "../ui/AddPostForm";
-import PostsList from "../ui/PostsList";
+import UserPostsList from "../ui/UserPostsList";
 import { redirect } from "next/navigation";
 
 import { Metadata } from "next";
@@ -16,8 +14,6 @@ export const metadata: Metadata = {
 export default async function Page(){
   const session = await getServerSession(options); 
   if(session?.user){
-    let posts: Post[] = await getUserPosts(session.user.id as string);
-    
     return (
       <div className="text-center">
         {
@@ -28,7 +24,7 @@ export default async function Page(){
 
           <AddPostForm user = { session.user }/>
           <div className="mt-10">
-            <PostsList user={ session.user } posts={ posts }/>
+            <UserPostsList user={ session.user } />
           </div>
         </>
         }

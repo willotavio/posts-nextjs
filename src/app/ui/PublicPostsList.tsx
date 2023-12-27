@@ -1,36 +1,42 @@
 'use client';
 
-import { Post, User } from "../../../types";
-import PostCard from "./PostCard";
-import { useAppSelector } from "../redux/store";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "../redux/store";
-import { insertPost } from "../redux/features/posts-slice";
+import { User } from "../../../types";
+import PostCard from "./PostCard";
+import { AppDispatch, useAppSelector } from "../redux/store";
 import { useEffect } from "react";
+import getPublicPosts from "../lib/post/getPublicPosts";
+import { insertPost } from "../redux/features/posts-slice";
 
 type Props = {
   user: User;
-  posts: Post[];
 }
 
-export default function PostsList({user, posts}: Props){
+export default function PublicPostsList({ user }: Props){
   const dispatch = useDispatch<AppDispatch>();
+
   useEffect(() => {
-    dispatch(insertPost(posts));
-  }, [dispatch, posts]);
+    const fetchPosts = async () => {
+      let posts = await getPublicPosts();
+      dispatch(insertPost(posts));
+    }
+    fetchPosts();
+  }, []);
+
   let postsList = useAppSelector((state) => state.postReducer.value.postsList);
   postsList = postsList.slice().sort((a, b) => {
     let dateA = new Date(a.date).getTime();
     let dateB = new Date(b.date).getTime();
     return dateB - dateA;
   });
+
   return(
     <div>
       {
         postsList
         &&
         postsList.map((post) => (
-          <PostCard key={ post.id } post={ post } user={ user as User }/>
+          <PostCard key={ post.id } post={ post } user={ user } />
         ))
       }
     </div>

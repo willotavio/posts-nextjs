@@ -3,7 +3,7 @@ import { options } from "./api/auth/[...nextauth]/options";
 import Link from "next/link";
 import getPublicPosts from "./lib/post/getPublicPosts";
 import AddPostForm from "./ui/AddPostForm";
-import PostsList from "./ui/PostsList";
+import PublicPostsList from "./ui/PublicPostsList";
 
 export default async function Home() {
   const session = await getServerSession(options);
@@ -16,7 +16,7 @@ export default async function Home() {
         <>
           <AddPostForm user = { session.user } />
           <div className="mt-10">
-            <PostsList user={ session.user } posts={ posts } />
+            <PublicPostsList user={ session.user } />
           </div>
         </>
         :
