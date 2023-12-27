@@ -6,7 +6,7 @@ import { useAppSelector } from "../redux/store";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../redux/store";
 import { insertPost } from "../redux/features/posts-slice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import getUserPosts from "../lib/post/getUserPosts";
 
 type Props = {
@@ -14,14 +14,58 @@ type Props = {
 }
 
 export default function UserPostsList({ user }: Props){
+  const handleScroll = () => {
+    const windowHeigth = window.innerHeight;
+    const scrollHeight = document.documentElement.scrollHeight;
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+
+    if(windowHeigth + scrollTop === scrollHeight){
+      setIsBottom(true);
+    }
+    else{
+      setIsBottom(false);
+    }
+  }
+  
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    }
+  }, []);
+  const [isBottom, setIsBottom] = useState(false);
+  useEffect(() => {
+    if(isBottom){
+      const fillPosts = async () => {
+        let res = await fetchPosts(postsList[postsList.length - 1].id);
+        dispatch(insertPost([...postsList, ...res]));
+      }
+      fillPosts();
+    }
+  }, [isBottom]);
+
+  const fetchPosts = (startAfterId?: string) => {
+    const fetch = async () => {
+      let res: Post[];
+      if(startAfterId){
+        res = await getUserPosts(user.id as string, startAfterId);
+      }
+      else{
+        res = await getUserPosts(user.id as string);
+      }
+      return res;
+    }
+    return fetch();
+  }
+
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    const fetchPosts = async () => {
+    const fillPosts = async () => {
       let posts = await getUserPosts(user.id as string);
       dispatch(insertPost(posts));
     }
-    fetchPosts();
+    fillPosts();
   }, []);
 
   let postsList = useAppSelector((state) => state.postReducer.value.postsList);

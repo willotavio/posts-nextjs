@@ -1,22 +1,33 @@
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, where, getDocs, orderBy, limit, getDoc, doc, startAfter } from "firebase/firestore";
 import { db } from "../../config/firebase";
 import { FirestoreUser, Post } from "../../../../types";
 import getUser from "../user/getUser";
 
-export default async function getPublicPosts(){
+export default async function getPublicPosts(startAfterId?: string){
   
-  let posts: Post[];
+  let posts;
   const postsRef = collection(db, "posts");
-  const q = query(postsRef, where("visibility", "==", "public"));
-  const querySnapshot = await getDocs(q);
-  posts = querySnapshot.docs.map((doc) => (
-      ({...doc.data(), id: doc.id})
-    )) as Post[];
-  
+  let q;
+  let documentSnapshots;
+
+  if(!startAfterId){
+    q = query(postsRef, where("visibility", "==", "public"), orderBy("date", "desc"), limit(5));
+    documentSnapshots = await getDocs(q);
+  }
+  else{
+    const docSnap = await getDoc(doc(postsRef, startAfterId));
+    q = query(postsRef, where("visibility", "==", "public"), orderBy("date", "desc"), startAfter(docSnap), limit(5));
+    documentSnapshots = await getDocs(q);
+  }
+
+  posts = documentSnapshots.docs.map((doc) => (
+    ({...doc.data(), id: doc.id})
+  )) as Post[];
   const userIds = Array.from(new Set(posts.map(post => post.userId)));
   const usersPromises = userIds.map( async (id) => {
     return {...await getUser(id as string), id};
   });
+  
   const users = await Promise.all(usersPromises);
   
   posts.forEach( async(post) => {
