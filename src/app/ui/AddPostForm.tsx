@@ -51,17 +51,17 @@ export default function AddPostForm({ user }: Props){
 
   if(user){
     return(
-      <form className="dark:bg-zinc-900 bg-gray-50 w-96 flex flex-col mx-auto my-10 rounded-md p-3" onSubmit={onSubmit}>
+      <form className="dark:bg-neutral-800 bg-neutral-200 w-96 flex flex-col mx-auto my-10 rounded-md p-3" onSubmit={onSubmit}>
         <div className="flex mb-5">
           { user.image && <Image className="rounded-full w-10 h-10 mr-2" src={ user.image } alt="profile picture" width={100} height={100} priority={true} /> }
-          <textarea className="dark:bg-zinc-900 bg-gray-50 w-80 rounded-lg p-2 focus:outline-slate-200" {...register("content")} placeholder="Say something" />
+          <textarea className="dark:bg-neutral-800 bg-neutral-200 w-80 rounded-lg p-2 focus:outline-slate-200" {...register("content")} placeholder="Say something" />
         </div>
         <div className="flex">
-          <select className="dark:bg-zinc-900 bg-gray-50 w-20 rounded-lg focus:outline-slate-200" {...register("visibility")}>
+          <select className="dark:bg-neutral-800 bg-neutral-200 w-20 rounded-lg focus:outline-slate-200 text-purple-700" {...register("visibility")}>
             <option value="public">Public</option>
             <option value="private">Private</option>
           </select>
-          <input className="bg-gray-900 text-white p-1 w-20 ml-auto rounded-2xl hover:cursor-pointer hover:bg-gray-800" type="submit" value="Post" />
+          <input className="btn-primary" type="submit" value="Post" />
         </div>
         
       </form>

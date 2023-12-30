@@ -4,6 +4,12 @@
 
 @layer base{
   body{
-    @apply dark:bg-zinc-800 bg-gray-100
+    @apply dark:bg-neutral-800 bg-neutral-200
+  }
+  .btn-primary{
+    @apply bg-purple-700 text-white w-20 p-1 px-2 ml-auto rounded-2xl hover:cursor-pointer hover:bg-opacity-80
+  }
+  .btn-red{
+    @apply bg-red-700 text-white w-20 p-1 px-2 ml-auto rounded-2xl hover:cursor-pointer hover:bg-opacity-80
   }
 }

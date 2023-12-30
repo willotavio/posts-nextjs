@@ -74,7 +74,7 @@ export default function PublicPostsList({ user }: Props){
   });
 
   return(
-    <div>
+    <div className="mb-20">
       {
         postsList
         &&

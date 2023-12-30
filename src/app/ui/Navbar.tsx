@@ -8,25 +8,28 @@ export default async function Navbar(){
   const session = await getServerSession(options);
 
   return (
-    <nav className="bg-zinc-200 dark:bg-zinc-900 flex fixed top-0 w-full p-2 z-50">
-      <div className="[&_.link]:mx-1 py-2 ...">
-        <Link className="link hover:opacity-80" href='/'>Home</Link>
-        <Link className="link hover:opacity-80" href='/about'>About</Link>
+    <nav className="bg-neutral-200 dark:bg-neutral-800 border-b-2 border-b-purple-700 flex fixed top-0 w-full p-2 z-10">
+      <div className="flex gap-2 py-2">
+        <Link className="hover:opacity-80 border-b-2 border-transparent hover:border-purple-700" href="/">Home</Link>
+        <Link className="hover:opacity-80 border-b-2 border-transparent hover:border-purple-700" href="/about">About</Link>
       </div>
       <>
         {
           !session
           ?
-          <div className="[&_.link]:mx-1 ml-auto py-2 ...">
-            <Link className="link hover:opacity-80" href='/api/auth/signin'>Signin</Link>
+          <div className="flex gap-2 ml-auto py-2">
+            <Link className="hover:opacity-80 border-b-2 border-transparent hover:border-purple-700" href="/api/auth/signin">Signin</Link>
           </div>
           :
-          <div className="mx-1 ml-auto flex gap-2">
-            <Link href='/profile'>
-              <Image className="mx-1 rounded-full w-10 h-10 hover:opacity-80" src={session.user?.image || ''} alt="profile picture" width={100} height={100} priority={true} />
-            </Link>
-            <ToggleThemeButton />
-            <Link className="mt-2 hover:opacity-80" href='/api/auth/signout'>Signout</Link>
+          <div className="ml-auto flex gap-2">
+          <Link href="/profile">
+            <Image className="mx-1 rounded-full w-10 h-10 hover:opacity-80" src={ session.user?.image || '' } alt="profile picture" width={100} height={100} priority={true} />
+          </Link>
+            <div className="ml-auto flex gap-2 py-2">
+              <ToggleThemeButton />
+              <Link className="hover:opacity-80 border-b-2 border-transparent hover:border-purple-700" href="/api/auth/signout">Signout</Link>
+            </div>
+            
           </div>
         }
       </>

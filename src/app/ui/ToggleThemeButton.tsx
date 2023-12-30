@@ -1,6 +1,7 @@
 'use client';
 
 import { useTheme } from "next-themes";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function ToggleThemeButton(){
@@ -12,11 +13,15 @@ export default function ToggleThemeButton(){
   }, []);
 
   if(!mounted){
-    return null;
+    return(
+      <div className="w-10"></div>
+    );
   }
   return(
-    <button className="w-10" onClick={ () => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark') }>
-      <span className="hover:opacity-80">{resolvedTheme ? resolvedTheme.charAt(0).toUpperCase() + resolvedTheme.slice(1) : " "}</span>
-    </button>
+    <div className="flex w-10 justify-center">
+      <Link className="hover:opacity-80 border-b-2 border-transparent hover:border-purple-700" href="#" onClick={ () => setTheme(resolvedTheme === "dark" ? "light" : "dark") }>
+        { resolvedTheme ? resolvedTheme.charAt(0).toUpperCase() + resolvedTheme.slice(1) : " " }
+      </Link>
+    </div>
   );
 }
