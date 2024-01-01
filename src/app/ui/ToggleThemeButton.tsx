@@ -19,7 +19,7 @@ export default function ToggleThemeButton(){
   }
   return(
     <div className="flex w-10 justify-center">
-      <Link className="hover:opacity-80 border-b-2 border-transparent hover:border-purple-700" href="#" onClick={ () => setTheme(resolvedTheme === "dark" ? "light" : "dark") }>
+      <Link className="link-default" href="#" onClick={ () => setTheme(resolvedTheme === "dark" ? "light" : "dark") }>
         { resolvedTheme ? resolvedTheme.charAt(0).toUpperCase() + resolvedTheme.slice(1) : " " }
       </Link>
     </div>

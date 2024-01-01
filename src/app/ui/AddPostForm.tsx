@@ -53,7 +53,7 @@ export default function AddPostForm({ user }: Props){
     return(
       <form className="dark:bg-neutral-800 bg-neutral-200 w-96 flex flex-col mx-auto my-10 rounded-md p-3" onSubmit={onSubmit}>
         <div className="flex mb-5">
-          { user.image && <Image className="rounded-full w-10 h-10 mr-2" src={ user.image } alt="profile picture" width={100} height={100} priority={true} /> }
+          { user.image && <Image className="outline outline-2 outline-purple-700 rounded-full w-10 h-10 mr-2" src={ user.image } alt="profile picture" width={100} height={100} priority={true} /> }
           <textarea className="dark:bg-neutral-800 bg-neutral-200 w-80 rounded-lg p-2 focus:outline-slate-200" {...register("content")} placeholder="Say something" />
         </div>
         <div className="flex">

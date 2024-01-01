@@ -68,7 +68,7 @@ export default function PublicPostsList({ user }: Props){
     fillPosts();
     setTimeout(() => {
       setIsLoading(true);
-    }, 200);
+    }, 300);
   }, []);
 
   let postsList = useAppSelector((state) => state.postReducer.value.postsList);

@@ -22,7 +22,7 @@ export default function PostCard({ post, user }: Props){
     <div className="dark:bg-neutral-800 bg-neutral-200 mx-auto my-1 p-3 w-96 border-b-2 border-b-purple-700">
       <div className="grid grid-cols-3 mb-5 [*_&]:text-xs">
         <div className="flex col-span-2 gap-2 items-center">
-          { post?.userPic && <Image className="rounded-full w-10 h-10" src={ post.userPic } alt="user picture" width={100} height={100} priority={true} /> }
+          { post?.userPic && <Image className="outline outline-2 outline-purple-700 rounded-full w-10 h-10" src={ post.userPic } alt="user picture" width={100} height={100} priority={true} /> }
           <p>{ post.userName }</p>
           <p>{ post.date.split(" ")[0] }</p>
         </div>

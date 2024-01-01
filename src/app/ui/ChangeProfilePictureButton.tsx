@@ -27,7 +27,7 @@ export default function ChangeProfilePictureButton({ user }: Props){
   return(
     <div>
       <div className="relative w-fit h-fit m-auto hover:opacity-50 rounded-full">
-        <Image className="rounded-full w-32 h-32 object-cover" src={user.image || ''} alt="profile picture" width={100} height={100} priority={true} />
+        <Image className="outline outline-2 outline-purple-700 rounded-full w-32 h-32 object-cover" src={user.image || ''} alt="profile picture" width={100} height={100} priority={true} />
         <label htmlFor="fileInput">
           <input className="opacity-0 absolute top-0 left-0 w-full h-full" type="file" id="fileInput" accept=".jpeg, .jpg, .png" onChange={ handleChange }/>
           <Image className="absolute w-full h-full p-12 top-0 opacity-0 hover:opacity-100 hover:cursor-pointer" src={ camera } alt="camera" width={30} height={30}></Image>
