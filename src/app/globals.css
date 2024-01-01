@@ -12,4 +12,13 @@
   .btn-red{
     @apply bg-red-700 text-white w-20 p-1 px-2 ml-auto rounded-2xl hover:cursor-pointer hover:bg-opacity-80
   }
+  .input-default{
+    @apply rounded-lg p-2 dark:bg-neutral-700 bg-neutral-100
+  }
+  .input-error{
+    @apply rounded-lg p-2 outline outline-red-500
+  }
+  .label-default{
+    @apply absolute top-2.5 left-2 text-neutral-800 dark:text-neutral-100 text-xs -translate-y-7 duration-200 peer-placeholder-shown:text-sm peer-placeholder-shown:-translate-y-0 peer-focus:-translate-y-7 peer-placeholder-shown:text-opacity-50 peer-focus:text-xs peer-focus:text-opacity-100 select-none hover:cursor-text
+  }
 }

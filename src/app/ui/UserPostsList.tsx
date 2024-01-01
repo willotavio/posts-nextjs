@@ -14,6 +14,8 @@ type Props = {
 }
 
 export default function UserPostsList({ user }: Props){
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleScroll = () => {
     const windowHeigth = window.innerHeight;
     const scrollHeight = document.documentElement.scrollHeight;
@@ -66,19 +68,19 @@ export default function UserPostsList({ user }: Props){
       dispatch(insertPost(posts));
     }
     fillPosts();
+    setTimeout(() => {
+      setIsLoading(true);
+    }, 200);
   }, []);
 
   let postsList = useAppSelector((state) => state.postReducer.value.postsList);
-  postsList = postsList.slice().sort((a, b) => {
-    let dateA = new Date(a.date).getTime();
-    let dateB = new Date(b.date).getTime();
-    return dateB - dateA;
-  });
 
   return(
     <div className="mb-20">
       {
         postsList
+        &&
+        isLoading
         &&
         postsList.map((post) => (
           <PostCard key={ post.id } post={ post } user={ user as User }/>

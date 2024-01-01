@@ -2,6 +2,9 @@ import type { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { FirestoreAdapter } from "@auth/firebase-adapter";
 import { cert } from "firebase-admin/app"
+import { db } from "@/app/config/firebase";
+import { doc, updateDoc } from "firebase/firestore";
+import { v4 } from "uuid";
 
 export const options: NextAuthOptions = {
   providers: [
@@ -17,8 +20,14 @@ export const options: NextAuthOptions = {
       privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n')
     })
   }),
+  events: {
+    async createUser({ user }){
+      const userDoc = doc(db, "users", user.id);
+      await updateDoc(userDoc, { name: v4() });
+    }
+  },
   callbacks: {
-    async session({session, user, token}){
+    async session({ session, user }){
       session.user.id = user.id;
       return session;
     }
