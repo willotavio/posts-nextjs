@@ -21,13 +21,16 @@ export default function PublicPostsList({ user }: Props){
     const scrollHeight = document.documentElement.scrollHeight;
     const scrollTop = window.scrollY || document.documentElement.scrollTop;
 
-    if(windowHeight + scrollTop === scrollHeight){
+    const threshold = 10;
+
+    if(windowHeight + scrollTop + threshold >= scrollHeight){
       setIsBottom(true);
     }
     else{
       setIsBottom(false);
     }
   }
+  
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => {
@@ -74,16 +77,20 @@ export default function PublicPostsList({ user }: Props){
   let postsList = useAppSelector((state) => state.postReducer.value.postsList);
 
   return(
-    <div className="mb-20">
+    <>
       {
         postsList
         &&
         isLoading
         &&
-        postsList.map((post) => (
-          <PostCard key={ post.id } post={ post } user={ user } />
-        ))
+        <div className="mb-20 flex flex-col items-center">
+          {
+            postsList.map((post) => (
+              <PostCard key={ post.id } post={ post } user={ user } />
+            ))
+          }
+        </div>
       }
-    </div>
+    </>
   );
 }

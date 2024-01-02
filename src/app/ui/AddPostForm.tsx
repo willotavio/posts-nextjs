@@ -51,20 +51,24 @@ export default function AddPostForm({ user }: Props){
 
   if(user){
     return(
-      <form className="dark:bg-neutral-800 bg-neutral-200 w-96 flex flex-col mx-auto my-10 rounded-md p-3" onSubmit={onSubmit}>
-        <div className="flex mb-5">
-          { user.image && <Image className="outline outline-2 outline-purple-700 rounded-full w-10 h-10 mr-2" src={ user.image } alt="profile picture" width={100} height={100} priority={true} /> }
-          <textarea className="dark:bg-neutral-800 bg-neutral-200 w-80 rounded-lg p-2 focus:outline-slate-200" {...register("content")} placeholder="Say something" />
-        </div>
-        <div className="flex">
-          <select className="dark:bg-neutral-800 bg-neutral-200 w-20 rounded-lg focus:outline-slate-200 text-purple-700" {...register("visibility")}>
-            <option value="public">Public</option>
-            <option value="private">Private</option>
-          </select>
-          <input className="btn-primary" type="submit" value="Post" />
-        </div>
-        
-      </form>
+      <div className="flex flex-col items-center w-full">
+        <form className="dark:bg-neutral-800 bg-neutral-200 flex flex-col my-10 gap-y-2 sm:w-[26rem] w-2/3 rounded-md" onSubmit={ onSubmit }>
+          <div className="flex gap-x-2 w-full justify-center">
+            <div className="flex mb-5 w-10 h-10 flex-shrink-0">
+              { user.image && <Image className="outline outline-2 outline-purple-700 rounded-full w-full h-full" src={ user.image } alt="profile picture" width={100} height={100} priority={true} /> }
+            </div>
+            <textarea className="dark:bg-neutral-800 bg-neutral-200 rounded-lg p-2 focus:outline-slate-200 w-full" { ...register("content") } placeholder="Say something" maxLength={ 128 } />
+          </div>
+          
+          <div className="flex w-full justify-center">
+            <select className="dark:bg-neutral-800 bg-neutral-200 rounded-lg focus:outline-slate-200 text-purple-700" { ...register("visibility") }>
+              <option value="public">Public</option>
+              <option value="private">Private</option>
+            </select>
+            <input className="btn-primary" type="submit" value="Post" />
+          </div>
+        </form>
+      </div>
     );    
   }
 }

@@ -18,7 +18,7 @@ export default function ToggleThemeButton(){
     );
   }
   return(
-    <div className="flex w-10 justify-center">
+    <div className="flex justify-center w-10">
       <Link className="link-default" href="#" onClick={ () => setTheme(resolvedTheme === "dark" ? "light" : "dark") }>
         { resolvedTheme ? resolvedTheme.charAt(0).toUpperCase() + resolvedTheme.slice(1) : " " }
       </Link>

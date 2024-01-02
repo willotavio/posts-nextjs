@@ -26,14 +26,16 @@ export default function ChangeProfilePictureButton({ user }: Props){
 
   return(
     <div>
-      <div className="relative w-fit h-fit m-auto hover:opacity-50 rounded-full">
-        <Image className="outline outline-2 outline-purple-700 rounded-full w-32 h-32 object-cover" src={user.image || ''} alt="profile picture" width={100} height={100} priority={true} />
-        <label htmlFor="fileInput">
-          <input className="opacity-0 absolute top-0 left-0 w-full h-full" type="file" id="fileInput" accept=".jpeg, .jpg, .png" onChange={ handleChange }/>
-          <Image className="absolute w-full h-full p-12 top-0 opacity-0 hover:opacity-100 hover:cursor-pointer" src={ camera } alt="camera" width={30} height={30}></Image>
-        </label>
+      <div className="relative hover:opacity-50 rounded-full my-2 justify-center">
+          <Image className="outline outline-2 outline-purple-700 rounded-full w-[6rem] h-[6rem] object-cover flex flex-shrink-0" src={ user.image || '' } alt="profile picture" width={100} height={100} priority={true} />
+        
+          <label className="w-full h-full absolute top-0 left-0 opacity-0 hover:opacity-100 hover:cursor-pointer" htmlFor="fileInput">
+            <input className="opacity-0 w-full h-full" type="file" id="fileInput" accept=".jpeg, .jpg, .png" onChange={ handleChange }/>
+            <Image className="w-full h-full p-[2rem] absolute top-0" src={ camera } alt="camera" width={30} height={30}></Image>
+          </label>
+        
       </div>
-      <p className="h-5">{ message }</p>
+      <p className="text-xs h-2 my-1">{ message }</p>
     </div>
   );
 }

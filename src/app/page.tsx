@@ -10,17 +10,11 @@ export default async function Home() {
     <div className='text-center'>
       {
         session?.user
-        ?
+        &&
         <>
           <AddPostForm user = { session.user } />
-          <div className="mt-10">
-            <PublicPostsList user={ session.user } />
-          </div>
+          <PublicPostsList user={ session.user } />
         </>
-        :
-        <div className="bg-slate-800 w-32 m-auto mt-5 text-white p-3 hover:bg-slate-700 ...">
-          <Link href='/api/auth/signin'>Login</Link>
-        </div>
       }
     </div>
   )

@@ -32,8 +32,8 @@ export default function EditUserForm({ user }: TProps){
   });
 
   return(
-    <form className="flex flex-col gap-y-5 w-80" onSubmit={ onSubmit }>
-      <p className="h-3 mb-2">{ message }</p>
+    <form className="flex flex-col gap-y-5" onSubmit={ onSubmit }>
+      <p className="h-5 text-xs pl-2 break-all">{ message }</p>
       <InputField label="Name" id="name" type="text" reg={ { register } } errors={ errors } />
       <input className="btn-primary m-auto" type="submit" value="Update" />
     </form>

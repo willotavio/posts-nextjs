@@ -15,7 +15,7 @@ export default async function Page(){
   const session = await getServerSession(options); 
   if(session?.user){
     return (
-      <div className="text-center">
+      <div>
         {
         session?.user
         &&
@@ -23,9 +23,8 @@ export default async function Page(){
           <UserCard user={ session.user } />
 
           <AddPostForm user = { session.user }/>
-          <div className="mt-10">
-            <UserPostsList user={ session.user } />
-          </div>
+
+          <UserPostsList user={ session.user } />
         </>
         }
       </div>

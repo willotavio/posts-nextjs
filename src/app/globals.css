@@ -7,10 +7,10 @@
     @apply dark:bg-neutral-800 bg-neutral-200
   }
   .btn-primary{
-    @apply bg-purple-700 text-white w-20 p-1 px-2 ml-auto rounded-2xl hover:cursor-pointer hover:bg-opacity-80
+    @apply bg-purple-700 text-white p-1 px-2 ml-auto rounded-2xl hover:cursor-pointer hover:bg-opacity-80
   }
   .btn-red{
-    @apply bg-red-700 text-white w-20 p-1 px-2 ml-auto rounded-2xl hover:cursor-pointer hover:bg-opacity-80
+    @apply bg-red-700 text-white p-1 px-2 ml-auto rounded-2xl hover:cursor-pointer hover:bg-opacity-80
   }
   .input-default{
     @apply rounded-lg p-2 dark:bg-neutral-700 bg-neutral-100

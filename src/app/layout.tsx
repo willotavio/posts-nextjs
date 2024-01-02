@@ -5,6 +5,7 @@ import Navbar from './ui/Navbar'
 import { ReduxProvider } from './redux/provider'
 import { AuthProvider } from './context/AuthProvider'
 import NextThemeProvider from './ThemeProvider/provider'
+import AppSessionProvider from './SessionProvider/provider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -25,14 +26,14 @@ export default function RootLayout({
     <html lang="en" className='light' style={{ colorScheme: 'light' }}>
       <body className={`${inter.className}`}>
         <NextThemeProvider>
-          <Navbar />
-          <div className="mt-20">
-            <AuthProvider>
-              <ReduxProvider>
+          <AuthProvider>
+            <ReduxProvider>
+              <AppSessionProvider>
+                <Navbar />
                 {children}
-              </ReduxProvider>
-            </AuthProvider>
-          </div>
+              </AppSessionProvider>
+            </ReduxProvider>
+          </AuthProvider>
         </NextThemeProvider>
       </body>
     </html>

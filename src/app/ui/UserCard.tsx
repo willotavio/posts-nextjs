@@ -19,11 +19,11 @@ export default function UserCard({ user }: Props){
       {
         user.id
         &&
-        <div className="text-center w-96 xs:w-24 m-auto">
+        <div className="flex flex-col items-center m-auto">
           <ChangeProfilePictureButton user={ user } />
-          <p>{ user.name }</p>
-          <p>{ user.email }</p>
-          <button className="btn-primary my-2" onClick={ () => setIsOpen(true) }>Edit</button>
+          <p>@{ user.name }</p>
+          <p className="sm:break-normal break-all">{ user.email }</p>
+          <button className="btn-primary text-base my-2 m-auto" onClick={ () => setIsOpen(true) }>Edit</button>
           {
             isOpen
             &&
