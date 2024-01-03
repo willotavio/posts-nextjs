@@ -7,12 +7,14 @@ import InputField from "./InputField";
 import updateUser from "../lib/user/updateUser";
 import { useState } from "react";
 import { User } from "../../../types";
+import { useSession } from "next-auth/react";
 
 type TProps = {
   user: User
 }
 
 export default function EditUserForm({ user }: TProps){
+  const { update } = useSession();
   const [message, setMessage] = useState("");
 
   const schema = z.object({
@@ -28,6 +30,7 @@ export default function EditUserForm({ user }: TProps){
 
   const onSubmit = handleSubmit( async (data) => {
    const res = await updateUser(user.id as string, data);
+   update(res.updatedInfo);
    setMessage(res.message);
   });
 

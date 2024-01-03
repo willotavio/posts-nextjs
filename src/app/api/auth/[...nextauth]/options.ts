@@ -27,8 +27,11 @@ export const options: NextAuthOptions = {
     }
   },
   callbacks: {
-    async session({ session, user }){
+    async session({ session, user, trigger, newSession }){
       session.user.id = user.id;
+      if(trigger === "update"){
+        session.user.name = newSession.name;
+      }
       return session;
     }
   },

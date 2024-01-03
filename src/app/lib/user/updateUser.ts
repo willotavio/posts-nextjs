@@ -14,7 +14,7 @@ export default async function updateUser(id: string, user: User){
     }
     const userRef = doc(db, "users", id);
     await updateDoc(userRef, user);
-    return { status: true, message: "User updated" };
+    return { status: true, message: "User updated", updatedInfo: user };
   }
   catch(error){
     console.log(error);
