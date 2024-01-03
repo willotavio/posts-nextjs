@@ -16,6 +16,8 @@ type Props = {
 export default function UserPostsList({ user }: Props){
   const [isLoading, setIsLoading] = useState(false);
 
+  const [fetchedAll, setFetchedAll] = useState(false);
+
   const handleScroll = () => {
     const windowHeigth = window.innerHeight;
     const scrollHeight = document.documentElement.scrollHeight;
@@ -41,8 +43,11 @@ export default function UserPostsList({ user }: Props){
   useEffect(() => {
     if(isBottom){
       const fillPosts = async () => {
-        let res = await fetchPosts(postsList[postsList.length - 1].id);
-        dispatch(insertPost([...postsList, ...res]));
+        if(!fetchedAll){
+          let res = await fetchPosts(postsList[postsList.length - 1].id);
+          res.length < 5 && setFetchedAll(true);
+          dispatch(insertPost([...postsList, ...res]));
+        }
       }
       fillPosts();
     }
