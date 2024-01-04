@@ -38,13 +38,15 @@ export default function AddPostForm({ user }: Props){
     data.date = date.toISOString().slice(0, 19).replace("T", " ");
     const postId = await addPost(data as Post);
     data.id = postId;
-    let updatedPostsList: Post[] = [...postsList, 
+    let updatedPostsList: Post[] = [ 
       {
         ...data as Post, 
         userName: user.name as string,
         userEmail: user.email as string,
         userPic: user.image as string
-      }];
+      },
+      ...postsList
+    ];
     dispatch(insertPost(updatedPostsList));
     reset();
   });

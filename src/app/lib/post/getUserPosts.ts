@@ -3,22 +3,33 @@ import { db } from "../../config/firebase";
 import { Post } from "../../../../types";
 import getUser from "../user/getUser";
 
-export default async function getUserPosts(userId: string, startAfterId?: string){
-
+export default async function getUserPosts(id: string, visibility?: string, startAfterId?: string){
   let posts: Post[] = [];
 
-  const queryUser = await getUser(userId as string);
-
+  const queryUser = await getUser(id as string);
+  if(!queryUser){
+    return [];
+  }
   const postsRef = collection(db, "posts");
   let q;
   let documentSnapshots;
   if(!startAfterId){
-    q = query(collection(db, "posts"), where("userId", "==", userId), orderBy("date", "desc"), limit(5));
+    if(visibility == "public"){
+      q = query(collection(db, "posts"), where("userId", "==", id), where("visibility", "==", "public"), orderBy("date", "desc"), limit(5));
+    }
+    else{
+      q = query(collection(db, "posts"), where("userId", "==", id), orderBy("date", "desc"), limit(5));
+    }
     documentSnapshots = await getDocs(q);
   }
   else{
     const docSnap = await getDoc(doc(postsRef, startAfterId));
-    q = query(collection(db, "posts"), where("userId", "==", userId), orderBy("date", "desc"), startAfter(docSnap), limit(5));
+    if(visibility == "public"){
+      q = query(collection(db, "posts"), where("userId", "==", id), where("visibility", "==", "public"), orderBy("date", "desc"), startAfter(docSnap), limit(5));
+    }
+    else{
+      q = query(collection(db, "posts"), where("userId", "==", id), orderBy("date", "desc"), startAfter(docSnap), limit(5));
+    }
     documentSnapshots = await getDocs(q);
   }
   
@@ -27,9 +38,9 @@ export default async function getUserPosts(userId: string, startAfterId?: string
     )) as Post[];
 
   posts.forEach((post) => {
-    post.userName = queryUser?.name;
-    post.userEmail = queryUser?.email;
-    post.userPic = queryUser?.image;
+    post.userName = queryUser?.data()?.name || "";
+    post.userEmail = queryUser?.data()?.email || "";
+    post.userPic = queryUser?.data()?.image || "";
   });
 
   return posts;

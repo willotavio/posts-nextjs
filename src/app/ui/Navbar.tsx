@@ -32,7 +32,7 @@ export default function Navbar(){
             &&
             <>
               <div className="ml-auto hidden flex-shrink-0 gap-2 sm:flex">
-                <Link href="/profile">
+                <Link href={ `/profile/${ session.data.user.name }` }>
                   <Image className="outline outline-2 outline-purple-700 mx-1 rounded-full w-10 h-10 hover:opacity-80" src={ session.data?.user?.image || '' } alt="profile picture" width={100} height={100} priority={true} />
                 </Link>
                 <div className="ml-auto flex gap-2 py-2">

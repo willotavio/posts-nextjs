@@ -25,12 +25,11 @@ export default async function getPublicPosts(startAfterId?: string){
   )) as Post[];
   const userIds = Array.from(new Set(posts.map(post => post.userId)));
   const usersPromises = userIds.map( async (id) => {
-    return {...await getUser(id as string), id};
+    return { ...(await getUser(id as string)).data(), id };
   });
-  
+
   const users = await Promise.all(usersPromises);
-  
-  posts.forEach( async(post) => {
+  posts.forEach( async (post) => {
     let postUser: FirestoreUser = users.find((user) => user.id == post.userId) as FirestoreUser;
     post.userName = postUser?.name;
     post.userEmail = postUser?.email;

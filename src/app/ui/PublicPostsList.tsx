@@ -7,13 +7,16 @@ import { AppDispatch, useAppSelector } from "../redux/store";
 import { useEffect, useState } from "react";
 import getPublicPosts from "../lib/post/getPublicPosts";
 import { insertPost } from "../redux/features/posts-slice";
+import { useSession } from "next-auth/react";
 
 type Props = {
   user: User;
 }
 
 export default function PublicPostsList({ user }: Props){
-  const [isLoading, setIsLoading] = useState(false);
+  const { status, data } = useSession();
+
+  const [isLoading, setIsLoading] = useState(true);
 
   const [fetchedAll, setFetchedAll] = useState(false);
 
@@ -75,23 +78,28 @@ export default function PublicPostsList({ user }: Props){
     }
     fillPosts();
     setTimeout(() => {
-      setIsLoading(true);
+      setIsLoading(false);
     }, 300);
-  }, []);
+
+    return () => {
+      dispatch(insertPost([]));
+    }
+  }, [data?.user.id]);
 
   let postsList = useAppSelector((state) => state.postReducer.value.postsList);
-
   return(
     <>
       {
         postsList
         &&
-        isLoading
+        !isLoading
+        &&
+        status === "authenticated"
         &&
         <div className="mb-20 flex flex-col items-center">
           {
             postsList.map((post) => (
-              <PostCard key={ post.id } post={ post } user={ user } />
+              <PostCard key={ post.id } post={ post } user={ user } userSession={ data?.user } />
             ))
           }
         </div>
