@@ -24,9 +24,11 @@ export default function PostCard({ post, user, userSession }: Props){
     <div className="flex flex-col justify-center dark:bg-neutral-800 bg-neutral-200 my-2 sm:w-[26rem] w-2/3 border-b-2 border-b-purple-700">
       <div className="grid sm:grid-cols-3 text-xs">
         <div className="flex col-span-2 gap-2 items-center p-1">
-          { post?.userPic && 
-            <Link href={ `/profile/${ post.userName }` }>
-              <Image className="outline outline-2 outline-purple-700 rounded-full w-10 h-10" src={ post.userPic } alt="user picture" width={100} height={100} priority={true} /> 
+          { 
+            post?.userPic
+            && 
+            <Link className="flex flex-shrink-0" href={ `/profile/${ post.userName }` }>
+              <Image className="outline outline-2 outline-purple-700 rounded-full w-10 h-10 " src={ post.userPic } alt="user picture" width={100} height={100} priority={true} /> 
             </Link>
           }
           <p className="break-all">@{ post.userName } - { post.date.split(" ")[0] }</p>

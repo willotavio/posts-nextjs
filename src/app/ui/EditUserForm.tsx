@@ -8,12 +8,15 @@ import updateUser from "../lib/user/updateUser";
 import { useState } from "react";
 import { User } from "../../../types";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 type TProps = {
   user: User
 }
 
 export default function EditUserForm({ user }: TProps){
+  const router = useRouter();
+  
   const { update } = useSession();
   const [message, setMessage] = useState("");
 
@@ -32,6 +35,7 @@ export default function EditUserForm({ user }: TProps){
    const res = await updateUser(user.id as string, data);
    update(res.updatedInfo);
    setMessage(res.message);
+   router.push(`/profile/${ data.name || user.name }`);
   });
 
   return(

@@ -29,7 +29,7 @@ export default function RootLayout({
           <AuthProvider>
             <ReduxProvider>
               <AppSessionProvider>
-                <div className="flex flex-col gap-y-16 h-screen">
+                <div className="flex flex-col h-screen">
                   <Navbar />
                   {children}
                 </div>
