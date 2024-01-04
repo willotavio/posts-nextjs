@@ -25,7 +25,7 @@ export default async function getPublicPosts(startAfterId?: string){
   )) as Post[];
   const userIds = Array.from(new Set(posts.map(post => post.userId)));
   const usersPromises = userIds.map( async (id) => {
-    return { ...(await getUser(id as string)).data(), id };
+    return { ...(await getUser(id as string)), id };
   });
 
   const users = await Promise.all(usersPromises);

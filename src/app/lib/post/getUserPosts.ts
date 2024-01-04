@@ -38,9 +38,9 @@ export default async function getUserPosts(id: string, visibility?: string, star
     )) as Post[];
 
   posts.forEach((post) => {
-    post.userName = queryUser?.data()?.name || "";
-    post.userEmail = queryUser?.data()?.email || "";
-    post.userPic = queryUser?.data()?.image || "";
+    post.userName = queryUser?.name || "";
+    post.userEmail = queryUser?.email || "";
+    post.userPic = queryUser?.image || "";
   });
 
   return posts;
