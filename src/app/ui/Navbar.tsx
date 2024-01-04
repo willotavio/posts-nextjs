@@ -13,7 +13,7 @@ export default function Navbar(){
 
   return (
     <div className="flex flex-col">
-      <nav className="bg-neutral-200 dark:bg-neutral-800 border-b-2 border-b-purple-700 flex items-center p-2 z-10">
+      <nav className="bg-neutral-200 dark:bg-neutral-800 border-b-2 border-b-purple-700 flex items-center fixed w-full p-2 z-10">
         <div className="flex gap-2 py-2">
           <Link className="link-default" href="/">Home</Link>
           <Link className="link-default hidden sm:flex" href="/about">About</Link>
@@ -23,10 +23,12 @@ export default function Navbar(){
             session.status == "unauthenticated"
             &&
             <div className="flex gap-2 ml-auto py-2">
-              <Link className="link-default" href="/api/auth/signin">Signin</Link>
+              <Link className="link-default hidden sm:flex" href="/api/auth/signin">Signin</Link>
             </div>
-
           }
+          <div className="ml-auto flex sm:hidden">
+            <button onClick={ () => setIsOpen(!isOpen) } className="btn-primary">=</button>
+          </div>
           {
             session.status == "authenticated"
             &&
@@ -40,9 +42,6 @@ export default function Navbar(){
                   <Link className="link-default" href="/api/auth/signout">Signout</Link>
                 </div>
               </div>
-              <div className="ml-auto flex sm:hidden">
-                <button onClick={ () => setIsOpen(!isOpen) } className="btn-primary">=</button>
-              </div>
             </>
           }
         </>
@@ -52,10 +51,21 @@ export default function Navbar(){
         &&
           <div className="flex sm:hidden gap-x-2 py-2 items-center justify-center bg-neutral-200 dark:bg-neutral-800 border-b-2 border-purple-700">
             <div className="flex flex-col items-start gap-y-1">
-              <Link className="link-default" href="/profile">Profile</Link>
+              {
+                session.status == "authenticated"
+                &&
+                <>
+                  <Link className="link-default" href="/profile">Profile</Link>  
+                  <Link className="link-default" href="/api/auth/signout">Signout</Link>
+                </>
+              }
               <ToggleThemeButton />
+              {
+                session.status == "unauthenticated"
+                &&
+                <Link className="link-default" href="/api/auth/signin">Signin</Link>
+              }
               <Link className="link-default" href="/about">About</Link>
-              <Link className="link-default" href="/api/auth/signout">Signout</Link>
             </div>
           </div>
         }
