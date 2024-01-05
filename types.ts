@@ -7,6 +7,23 @@ export type User = {
   azp?: string | null | undefined;
   email_verified?: boolean | null | undefined;
   exp?: number | null | undefined;
+  description?: string | null | undefined;
+}
+
+export type TUser = {
+  id: string;
+  name: string;
+  email: string;
+  image: string;
+  description: string;
+}
+
+export type TUpdateUser = {
+  id?: string;
+  name?: string;
+  email?: string;
+  image?: string;
+  description?: string;
 }
 
 export type FirestoreUser = {

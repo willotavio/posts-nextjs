@@ -6,7 +6,7 @@ import { z } from "zod";
 import InputField from "./InputField";
 import updateUser from "../lib/user/updateUser";
 import { useState } from "react";
-import { User } from "../../../types";
+import { TUpdateUser, User } from "../../../types";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
@@ -21,27 +21,51 @@ export default function EditUserForm({ user }: TProps){
   const [message, setMessage] = useState("");
 
   const schema = z.object({
-    name: z.string().min(4, "Name must contain between 4 and 32 characters").max(32, "Name must contain between 4 and 32 characters")
+    name: z.string().min(4, "Name must contain between 4 and 32 characters").max(16, "Name must contain between 4 and 16 characters"),
+    description: z.string().max(16, "Description must contain less than 16 characters")
   });
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: zodResolver(schema),
     defaultValues: {
-      name: user.name
+      name: user.name,
+      description: user.description
     }
   });
 
   const onSubmit = handleSubmit( async (data) => {
-   const res = await updateUser(user.id as string, data);
-   update(res.updatedInfo);
-   setMessage(res.message);
-   router.push(`/profile/${ data.name || user.name }`);
+    let formData: User = {};
+
+    if(data.name !== user.name){
+      formData.name = data.name;
+    }
+    if(data.description !== user.description){
+      formData.description = data.description;
+    }
+
+    if(Object.keys(formData).length > 0){
+      let res = await updateUser(user.id as string, user, formData as TUpdateUser);
+      setMessage(res.message);
+
+      if(res.status){
+        update(res.updatedInfo);
+        if(!res.updatedInfo?.name){
+          router.push(`/profile/${ user.name }`);
+          router.refresh();
+        }
+        else{
+          router.push(`/profile/${ res.updatedInfo?.name }`);
+          router.refresh();
+        }  
+      }
+    }
   });
 
   return(
     <form className="flex flex-col gap-y-5" onSubmit={ onSubmit }>
       <p className="h-5 text-xs pl-2 break-all">{ message }</p>
       <InputField label="Name" id="name" type="text" reg={ { register } } errors={ errors } />
+      <InputField label="Description" id="description" type="text" reg={ { register } } errors={ errors } />
       <input className="btn-primary m-auto" type="submit" value="Update" />
     </form>
   );

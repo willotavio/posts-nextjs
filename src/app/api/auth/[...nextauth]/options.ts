@@ -23,14 +23,16 @@ export const options: NextAuthOptions = {
   events: {
     async createUser({ user }){
       const userDoc = doc(db, "users", user.id);
-      await updateDoc(userDoc, { name: v4() });
+      await updateDoc(userDoc, { name: v4(), description: "" });
     }
   },
   callbacks: {
     async session({ session, user, trigger, newSession }){
       session.user.id = user.id;
       if(trigger === "update"){
-        session.user.name = newSession.name;
+        if(newSession.name){
+          session.user.name = newSession.name;
+        }
       }
       return session;
     }

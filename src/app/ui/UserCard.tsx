@@ -32,6 +32,7 @@ export default function UserCard({ user, userSession }: Props){
             <Image className="my-2 outline outline-2 outline-purple-700 rounded-full w-[6rem] h-[6rem] object-cover flex flex-shrink-0" src={ user.image || '' } alt="profile picture" width={100} height={100} priority={true} />
           }
           <p>@{ user.name }</p>
+          <p>{ user.description }</p>
           {
             userSession.id === user.id
             &&
@@ -47,7 +48,6 @@ export default function UserCard({ user, userSession }: Props){
               }
             </>
           }
-          
         </div>
       }
     </>

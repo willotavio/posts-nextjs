@@ -23,8 +23,9 @@ export default function Navbar(){
             {
               session.status == "unauthenticated"
               &&
-              <div className="flex gap-2 ml-auto py-2">
-                <Link className="link-default hidden sm:flex" href="/api/auth/signin">Signin</Link>
+              <div className="gap-2 ml-auto py-2 hidden sm:flex">
+                <ToggleThemeButton />
+                <Link className="link-default" href="/api/auth/signin">Signin</Link>
               </div>
             }
             <div className="ml-auto flex sm:hidden">
