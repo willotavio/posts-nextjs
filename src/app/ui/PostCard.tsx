@@ -38,7 +38,7 @@ export default function PostCard({ post, user, userSession }: Props){
           userSession.id === post.userId
           &&
           <div className="flex sm:ml-auto col-span-1 gap-x-1 items-center">
-            <select className="dark:bg-neutral-800 bg-neutral-200 text-purple-700 appearance-none p-2 " id="selectInput" onChange={ handleSelect }>
+            <select className="dark:bg-neutral-800 bg-neutral-200 text-purple-700 appearance-none p-2" id="selectInput" onChange={ handleSelect }>
               <option value={ post.visibility }>{ post.visibility.charAt(0).toUpperCase() + post.visibility.slice(1) }</option>
               {
                 post.visibility === "public"
