@@ -43,7 +43,7 @@ export default function PublicPostsList({ user }: Props){
     }
   }, []);
   useEffect(() => {
-    if(isBottom){
+    if(isBottom && !isLoading){
       const fillPosts = async () => {
         if(!fetchedAll){
           let res = await fetchPosts(postsList[postsList.length - 1].id);
