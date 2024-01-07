@@ -21,7 +21,8 @@ export default function EditUserForm({ user }: TProps){
   const [message, setMessage] = useState("");
 
   const schema = z.object({
-    name: z.string().min(4, "Name must contain between 4 and 32 characters").max(16, "Name must contain between 4 and 16 characters"),
+    name: z.string().min(4, "Name must contain between 4 and 16 characters").max(16, "Name must contain between 4 and 16 characters")
+      .refine((value) => /^[a-zA-Z0-9_.]{5,15}$/.test(value), "Name must contain only letters, numbers, \"_\" and \".\""),
     description: z.string().max(16, "Description must contain less than 16 characters")
   });
 
