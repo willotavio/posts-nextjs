@@ -8,6 +8,7 @@ export type User = {
   email_verified?: boolean | null | undefined;
   exp?: number | null | undefined;
   description?: string | null | undefined;
+  cover?: string | null | undefined;
 }
 
 export type TUser = {
@@ -16,6 +17,7 @@ export type TUser = {
   email: string;
   image: string;
   description: string;
+  cover: string;
 }
 
 export type TUpdateUser = {

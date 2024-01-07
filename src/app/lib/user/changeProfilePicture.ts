@@ -3,7 +3,7 @@ import { db } from "../../config/firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { v4 } from "uuid";
 import { User } from "../../../../types";
-import deleteProfilePicture from "./deleteProfilePicture";
+import deleteImage from "./deleteImage";
 
 export default async function postImage(image: File, user: User){
   if(!image){
@@ -20,10 +20,10 @@ export default async function postImage(image: File, user: User){
     const url = await getDownloadURL(result.ref);
 
     const userDocRef = doc(db, "users", user.id as string);
-    const userDocDate = await getDoc(userDocRef);
-    const userPicture = await userDocDate.data()?.image;
+    const userDocData = await getDoc(userDocRef);
+    const userPicture = await userDocData.data()?.image;
 
-    await deleteProfilePicture(userPicture);
+    await deleteImage(userPicture);
 
     updateDoc(userDocRef, { image: url });
     return true;
