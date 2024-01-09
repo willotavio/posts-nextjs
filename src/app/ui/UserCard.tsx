@@ -41,7 +41,7 @@ export default function UserCard({ user, userSession }: Props){
                 ?
                 <ChangeProfilePictureButton user={ user } />
                 :
-                <Image className="my-2 outline outline-2 outline-purple-700 rounded-full sm:w-[6rem] sm:h-[6rem] w-[5rem] h-[5rem] transition-all ease-in-out object-cover flex flex-shrink-0" src={ user.image || '' } alt="profile picture" width={100} height={100} priority={true} />
+                <Image className="my-2 outline outline-4 outline-neutral-200 dark:outline-neutral-800 rounded-full sm:w-[6rem] sm:h-[6rem] w-[5rem] h-[5rem] object-cover flex flex-shrink-0" src={ user.image || '' } alt="profile picture" width={100} height={100} priority={true} />
               }
             </div>
           </div>
